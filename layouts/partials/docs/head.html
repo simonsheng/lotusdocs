@@ -1,5 +1,6 @@
 <head>
     <meta charset="utf-8" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4057548371983233" crossorigin="anonymous"></script>
     <title>
         {{- $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
         {{- if eq $url "/" }}
@@ -17,16 +18,14 @@
         {{- end -}}
     </title>
     {{- if not hugo.IsProduction }}
-    <meta name="robots" content="noindex">
+    <meta name="robots" content="index, follow">
     {{- end }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{- with .Description | default ($.Param "description") }}
     <meta name="description" content="{{ . }}">
     {{- end }}
-    <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
-    <meta name="author" content="Colin Wilson - Lotus Labs" />
-    <meta name="email" content="support@aigis.uk" />
-    <meta name="website" content="https://lotusdocs.dev" />
+    <meta name="keywords" content="HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Rust, GoLang, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website">
+    <meta name="website" content="https://www.gazehub.com" />
     <meta name="Version" content="v0.1.0" />
     <!-- favicon -->
     {{ block "favicon" . }}{{ partialCached (printf "%s/%s" ($.Scratch.Get "pathName") "head/favicon.html") . }}{{ end }}
