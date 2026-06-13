@@ -17,7 +17,7 @@
             {{- end }}
         {{- end -}}
     </title>
-    {{- if not hugo.IsProduction }}
+    {{- if hugo.IsProduction }}
     <meta name="robots" content="index, follow">
     {{- end }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@
         {{ if and (.Site.Params.docsearch.appID) (.Site.Params.docsearch.apiKey) -}}
         {{ else }}
             {{ $flexSearch := resources.Get (printf "/%s/%s" ($.Scratch.Get "pathName") "js/flexsearch.bundle.js") }}
-            {{- if not hugo.IsServer }}
+            {{- if hugo.IsProduction }}
                 {{ $flexSearch := $flexSearch | minify | fingerprint "sha384" }}
                 <script type="text/javascript" src="{{ $flexSearch.Permalink }}" integrity="{{ $flexSearch.Data.Integrity }}" crossorigin="anonymous"></script>
                 {{ else }}
@@ -91,13 +91,13 @@
         {{- partialCached (printf "%s/%s" ($.Scratch.Get "pathName") "footer/katex.html") . -}}
     {{ end }}
     <!-- Plausible Analytics Config -->
-    {{- if not hugo.IsServer }}
+    {{- if hugo.IsProduction }}
     {{ if and (.Site.Params.plausible.scriptURL | default "https://plausible.io") (.Site.Params.plausible.dataDomain) -}}
         {{- partialCached (printf "%s/%s" ($.Scratch.Get "pathName") "head/plausible") . }}
     {{- end -}}
     {{- end -}}
     <!-- Google Analytics v4 Config -->
-    {{- if not hugo.IsServer }}
+    {{- if hugo.IsProduction }}
     {{- if site.Config.Services.GoogleAnalytics.ID }}
         {{- template "_internal/google_analytics.html" . -}}
     {{- end -}}

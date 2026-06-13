@@ -2,7 +2,7 @@
     <meta charset="utf-8" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4057548371983233" crossorigin="anonymous"></script>
     <title>{{- .Site.Title }}</title>
-    {{- if not hugo.IsProduction }}
+    {{- if hugo.IsProduction }}
     <meta name="robots" content="index, follow">
     {{- end }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,22 +39,22 @@
     <!-- Image Compare Viewer -->
     {{ if ($.Scratch.Get "image_compare_enabled") }}
         {{ $imagecompare := resources.Get "js/image-compare-viewer.min.js" }}
-        {{- if not hugo.IsServer }}
+        {{- if hugo.IsProduction }}
             {{- $js := (slice $imagecompare) | resources.Concat "/js/image-compare.js" | minify | fingerprint "sha384" }}
             <script type="text/javascript" src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
         {{- else }}
             {{- $js := (slice $imagecompare) | resources.Concat "/js/image-compare.js" }}
-            <script type="text/javascript" src="{{ $js.Permalink }}" {{ if hugo.IsProduction }}integrity="{{ $js.Data.Integrity }}"{{ end }}></script>
+            <script type="text/javascript" src="{{ $js.Permalink }}"></script>
         {{- end }}
     {{- end }}
     <!-- Plausible Analytics Config -->
-    {{- if not hugo.IsServer }}
+    {{- if hugo.IsProduction }}
     {{ if and (.Site.Params.plausible.scriptURL) (.Site.Params.plausible.dataDomain) -}}
         {{- partialCached "head/plausible" . }}
     {{- end -}}
     {{- end -}}
     <!-- Google Analytics v4 Config -->
-    {{- if not hugo.IsServer }}
+    {{- if hugo.IsProduction }}
     {{- if site.Config.Services.GoogleAnalytics.ID }}
         {{- template "_internal/google_analytics.html" . -}}
     {{- end -}}
